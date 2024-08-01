@@ -1,3 +1,3 @@
 library image_button;
 
-export './image_button.dart';
+export 'src/image_button.dart' show ImageButton;
