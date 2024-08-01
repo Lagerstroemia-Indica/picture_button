@@ -70,6 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
               },
               image: Image.asset("assets/google_sign_image.png").image,
+              fit: BoxFit.contain,
+              width: 200,
+              height: 200,
             )
           ],
         ),
