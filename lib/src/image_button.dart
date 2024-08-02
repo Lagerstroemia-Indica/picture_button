@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:image_button/src/image_button_mixin_protocol.dart';
 
 class ImageButton extends StatefulWidget {
   const ImageButton({
@@ -9,10 +10,14 @@ class ImageButton extends StatefulWidget {
     this.width,
     this.height,
     this.fit = BoxFit.contain,
+    this.opacity = 1.0,
     this.borderRadius,
+    this.borderRadiusInk,
+    this.imageBackgroundColor,
     this.splashColor,
     this.highlightColor,
     this.focusColor,
+    this.enabled = true,
     this.bubbleEffect = false,
 
     this.child
@@ -46,10 +51,14 @@ class ImageButton extends StatefulWidget {
   /// setting Image [width]
   /// type double
   ///
+  /// -
+  ///
   /// if [width] is not defined, ImageProvider will find Size itself.
   final double? width;
   /// setting Image [height]
   /// type double
+  ///
+  /// -
   ///
   /// if [height] is not defined, ImageProvider will find Size itself.
   final double? height;
@@ -57,6 +66,17 @@ class ImageButton extends StatefulWidget {
   ///
   /// default is BoxFit.contain
   final BoxFit fit;
+  /// ImageButton's measure opacity
+  ///
+  /// -
+  ///
+  /// default is 1.0
+  ///
+  /// -
+  ///
+  /// if you define [enabled] property return 'false'
+  /// and do not define [opacity] return value '0.7'
+  final double opacity;
   /// Box Border Radius
   ///
   /// ImageButton Widget's BorderRadius
@@ -68,9 +88,19 @@ class ImageButton extends StatefulWidget {
   /// why am I define property name add 'Ink',
   /// once ImageButton Widget need two borderRadius.
   ///
+  /// -
+  ///
   /// first, [borderRadius] require Widget base border.
   /// second, [borderRadiusInl] require effect in Widget base border.
   final BorderRadius? borderRadiusInk;
+  /// [imageBackgroundColor] behind [image] color.
+  ///
+  /// -
+  ///
+  /// maybe you define borderRadius or width, height.
+  /// I recommend imageBackgroundColor Colors.transparent :)
+  /// when exist only image, that is pretty.
+  final Color? imageBackgroundColor;
   /// [onPressed] onTap event color
   ///
   /// get ripple effect. touch event.
@@ -82,8 +112,18 @@ class ImageButton extends StatefulWidget {
   /// if you hardware keyboard or another things.
   /// direction focusing Color event.
   final Color? focusColor;
+  /// [ImageButton] define Enabled
+  ///
+  /// if enabled is 'false' don't use onPressed and change down tone color
+  ///
+  /// -
+  ///
+  /// default is 'true'
+  final bool enabled;
   /// if you onPressed Event ImageButton Widget,
   /// Widget show you bubble effect.
+  ///
+  /// -
   ///
   /// [bubbleEffect] default is 'false'
   @Deprecated("bubbleEffect has not implemented.")
@@ -97,9 +137,13 @@ class ImageButton extends StatefulWidget {
   State<ImageButton> createState() => _ImageButtonState();
 }
 
-class _ImageButtonState extends State<ImageButton> {
+class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol{
   /// real image size
   ui.Image? imageInfo;
+  /// purpose. check Image real size check
+  late final ImageStream imageStream;
+  ///
+  late final ImageStreamListener imageStreamListener;
 
   /// BoxFit.contain image display width size
   double? imageDisplayWidth;
@@ -117,49 +161,57 @@ class _ImageButtonState extends State<ImageButton> {
   /// then imageInfo size not check.
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (imageInfo != null) {
-          final Size displaySize = calculateImageDisplaySize(constraints);
-          imageDisplayWidth = displaySize.width;
-          imageDisplayHeight = displaySize.height;
-        }
+    return Semantics(
+      button: true,
+      enabled: widget.enabled,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (imageInfo != null) {
+            final Size displaySize = calculateImageDisplaySize(constraints);
+            imageDisplayWidth = displaySize.width;
+            imageDisplayHeight = displaySize.height;
+          }
 
-        return Container(
-          constraints: constraints,
-          // width: width ?? constraints.maxWidth,
-          // height: height ?? constraints.maxHeight,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: widget.image,
-              fit: widget.fit,
+          return Container(
+            constraints: constraints,
+            // width: width ?? constraints.maxWidth,
+            // height: height ?? constraints.maxHeight,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: widget.image,
+                fit: widget.fit,
+                opacity: widget.opacity,
+              ),
+              color: widget.imageBackgroundColor,
+              borderRadius: widget.borderRadius,
             ),
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: widget.onPressed,
-              splashColor: widget.splashColor,
-              highlightColor: widget.highlightColor,
-              focusColor: widget.focusColor,
-              child: SizedBox(
-                width: imageWidth,
-                height: imageHeight,
-                child: widget.child,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: widget.enabled ? widget.onPressed : null,
+                splashColor: widget.splashColor,
+                highlightColor: widget.highlightColor,
+                focusColor: widget.focusColor,
+                borderRadius: widget.borderRadiusInk ?? widget.borderRadius,
+                enableFeedback: widget.enabled,
+                child: SizedBox(
+                  width: imageWidth,
+                  height: imageHeight,
+                  child: widget.child,
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
-  late final ImageStream imageStream;
-  late final ImageStreamListener imageStreamListener;
+
 
   /// ImageProvider's real sizes.
   ///
   /// example) assets/google_sign_image.png : 567x132
-  ///
+  @override
   Future<void> loadImageInfo() async {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       imageStream = widget.image.resolve(ImageConfiguration.empty);
@@ -186,7 +238,7 @@ class _ImageButtonState extends State<ImageButton> {
   /// this function get image's display size.
   ///
   /// BoxFit.contain, BoxFit.fitWidth, BoxFit.fitHeight
-  @protected
+  @override
   Size calculateImageDisplaySize(BoxConstraints constraints) {
     assert(imageInfo != null, "imageInfo instance has not create.");
 
@@ -236,6 +288,7 @@ class _ImageButtonState extends State<ImageButton> {
   }
 
   /// define [imageWidth]
+  @override
   double? get imageWidth {
     double? width;
     if (widget.fit == BoxFit.cover ||
@@ -257,6 +310,7 @@ class _ImageButtonState extends State<ImageButton> {
   }
 
   /// define [imageHeight]
+  @override
   double? get imageHeight {
     double? height;
     if (widget.fit == BoxFit.cover ||

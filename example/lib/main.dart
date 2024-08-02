@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_button/image_button.dart';
+import 'package:image_button/image_button_library.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
               },
               image: Image.asset("assets/google_sign_image.png").image,
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
               width: 200,
               height: 200,
-            )
+            ),
           ],
         ),
       ),

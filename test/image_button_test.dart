@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:image_button/image_button.dart';
+import 'package:image_button/image_button_library.dart';
 
 void main() {
   // test('adds one to input values', () {
