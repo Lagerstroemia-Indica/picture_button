@@ -24,7 +24,7 @@ class PictureButton extends StatefulWidget {
       this.borderRadius,
       this.borderRadiusInk,
       this.paddingInk = EdgeInsets.zero,
-      this.imageBackgroundColor,
+      this.backgroundColor,
       this.splashColor,
       this.highlightColor,
       this.focusColor,
@@ -154,7 +154,7 @@ class PictureButton extends StatefulWidget {
   /// maybe you define borderRadius or width, height.
   /// I recommend imageBackgroundColor Colors.transparent :)
   /// when exist only image, that is pretty.
-  final Color? imageBackgroundColor;
+  final Color? backgroundColor;
 
   /// [onPressed] onTap event color
   ///
@@ -291,7 +291,7 @@ class _PictureButtonState extends State<PictureButton>
                   fit: widget.fit,
                   opacity: widget.opacity,
                 ),
-                color: widget.imageBackgroundColor,
+                color: widget.backgroundColor,
                 border: widget.border,
                 borderRadius: widget.borderRadius,
               ),

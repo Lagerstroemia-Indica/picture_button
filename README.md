@@ -1,4 +1,4 @@
-f<!--
+<!--
 This README describes the package. If you publish this package to pub.dev,
 this README's contents appear on the landing page for your package.
 
@@ -27,13 +27,13 @@ I am very happy that I somehow seem to have deployed a useful widget.
 ## Getting started 🌱
 
 my example image(google sign image) <br/>
-path : `[project]/example/assets/` <br/> <br/>
+path : `[project]/assets/` <br/> <br/>
 <img src="https://github.com/user-attachments/assets/1c70006a-ee4c-4da3-9f58-b99d15865169" alt="Screenshot" width="480">
 
 <br/>
 
  grant assets path from pubspec.yaml <br/>
- path : `[project]/example/pubspec.yaml` <br/> 
+ path : `[project]/pubspec.yaml` <br/> 
  ```yaml
 flutter:
 
@@ -61,28 +61,28 @@ import 'package:picture_button/picture_button.dart';
 
 ## Usage 🚀
 
-| parameter           | required            | type                 | default                    |
-|---------------------|---------------------|----------------------|----------------------------|
-| onPressed           | :heavy_check_mark:  | VoidCallback         |                            |
-| onLongPressed       | :x:                 | VoidCallback?        |                            |
-| image               | :heavy_check_mark:  | ImageProvider        |                            |
-| width               | :x:                 | double?              | imageWidth                 |
-| height              | :x:                 | double?              | imageHieght                |
-| fit                 | :x:                 | BoxFit               | BoxFit.contain             |
-| opacity             | :x:                 | double               | 1.0                        |
-| border              | :x:                 | Border?              |                            |
-| borderRadius        | :x:                 | BorderRadius?        |                            |
-| borderRadiusInk     | :x:                 | BorderRadius?        |                            |
-| paddingInk          | :x:                 | EdgeInsetGeometry    | EdgeInsets.zero            |
-| imageBacgroundColor | :x:                 | Color?               |                            |
-| splashColor         | :x:                 | Color?               |                            |
-| highlightColor      | :x:                 | Color?               |                            |
-| focusColor          | :x:                 | Color?               |                            |
-| hoverColor          | :x:                 | Color?               |                            |
-| enabled             | :x:                 | bool                 | true                       |
-| useBubbleEffect     | :x:                 | bool                 | false                      |
-| bubbleEffect        | :x:                 | PictureBubbleEffect? | PictureBubbleEffect.shrink | 
-| child               | :x:                 | Widget?              |                            |
+| parameter       | required            | type                 | default                    |
+|-----------------|---------------------|----------------------|----------------------------|
+| onPressed       | :heavy_check_mark:  | VoidCallback         |                            |
+| onLongPressed   | :x:                 | VoidCallback?        |                            |
+| image           | :heavy_check_mark:  | ImageProvider        |                            |
+| width           | :x:                 | double?              | imageWidth                 |
+| height          | :x:                 | double?              | imageHieght                |
+| fit             | :x:                 | BoxFit               | BoxFit.contain             |
+| opacity         | :x:                 | double               | 1.0                        |
+| border          | :x:                 | Border?              |                            |
+| borderRadius    | :x:                 | BorderRadius?        |                            |
+| borderRadiusInk | :x:                 | BorderRadius?        |                            |
+| paddingInk      | :x:                 | EdgeInsetGeometry    | EdgeInsets.zero            |
+| backgroundColor | :x:                 | Color?               |                            |
+| splashColor     | :x:                 | Color?               |                            |
+| highlightColor  | :x:                 | Color?               |                            |
+| focusColor      | :x:                 | Color?               |                            |
+| hoverColor      | :x:                 | Color?               |                            |
+| enabled         | :x:                 | bool                 | true                       |
+| useBubbleEffect | :x:                 | bool                 | false                      |
+| bubbleEffect    | :x:                 | PictureBubbleEffect? | PictureBubbleEffect.shrink | 
+| child           | :x:                 | Widget?              |                            |
 
 <br/>
 
