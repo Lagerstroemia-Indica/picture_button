@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:picture_button/src/picture_button_mixin_protocol.dart';
+import './picture_button_mixin_protocol.dart';
 
 class PictureButton extends StatefulWidget {
   /// thank you so much use this :)
@@ -155,10 +155,13 @@ class PictureButton extends StatefulWidget {
   /// if you onPressed Event PictureButton Widget,
   /// Widget show you bubble effect.
   ///
+  /// maybe if you don't want ink color.
+  /// you set [highlightColor] property [Colors.transparent].
+  /// and [splashColor] property [Colors.transparent].
+  ///
   /// -
   ///
   /// [bubbleEffect] default is 'false'
-  @Deprecated("bubbleEffect has not implemented.")
   final bool bubbleEffect;
 
 
@@ -169,7 +172,7 @@ class PictureButton extends StatefulWidget {
   State<PictureButton> createState() => _PictureButtonState();
 }
 
-class _PictureButtonState extends State<PictureButton> with PictureButtonMixinProtocol{
+class _PictureButtonState extends State<PictureButton> with PictureButtonMixinProtocol {
   /// real image size
   ui.Image? imageInfo;
   /// purpose. check Image real size check
@@ -182,11 +185,18 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
   /// BoxFit.contain image display height size
   double? imageDisplayHeight;
 
+  double animScale = 1.0;
+
   @override
   void initState() {
     super.initState();
 
     loadImageInfo();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   /// if image fit is BoxFit.cover, BoxFit.fill,
@@ -204,34 +214,59 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
             imageDisplayHeight = displaySize.height;
           }
 
-          return Container(
-            constraints: constraints,
-            // width: width ?? constraints.maxWidth,
-            // height: height ?? constraints.maxHeight,
-            padding: widget.paddingInk,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: widget.image,
-                fit: widget.fit,
-                opacity: widget.opacity,
+          return AnimatedScale(
+            scale: animScale,
+            duration: const Duration(milliseconds: 100),
+            child: Container(
+              constraints: constraints,
+              // width: width ?? constraints.maxWidth,
+              // height: height ?? constraints.maxHeight,
+              padding: widget.paddingInk,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: widget.image,
+                  fit: widget.fit,
+                  opacity: widget.opacity,
+                ),
+                color: widget.imageBackgroundColor,
+                border: widget.border,
+                borderRadius: widget.borderRadius,
               ),
-              color: widget.imageBackgroundColor,
-              border: widget.border,
-              borderRadius: widget.borderRadius,
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: widget.enabled ? widget.onPressed : null,
-                splashColor: widget.splashColor,
-                highlightColor: widget.highlightColor,
-                focusColor: widget.focusColor,
-                borderRadius: widget.borderRadiusInk ?? widget.borderRadius,
-                enableFeedback: widget.enabled,
-                child: SizedBox(
-                  width: imageWidth,
-                  height: imageHeight,
-                  child: widget.child,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: widget.enabled ? widget.onPressed : null,
+                  onTapDown: (details) {
+                    if (widget.bubbleEffect) {
+                      setState(() {
+                        animScale = 1.05;
+                      });
+                    }
+                  },
+                  onTapUp: (details) {
+                    if (widget.bubbleEffect) {
+                      setState(() {
+                        animScale = 1.0;
+                      });
+                    }
+                  },
+                  onTapCancel: () {
+                    if (widget.bubbleEffect) {
+                      setState(() {
+                        animScale = 1.0;
+                      });
+                    }
+                  },
+                  splashColor: widget.splashColor,
+                  highlightColor: widget.highlightColor,
+                  focusColor: widget.focusColor,
+                  borderRadius: widget.borderRadiusInk ?? widget.borderRadius,
+                  enableFeedback: widget.enabled,
+                  child: SizedBox(
+                    width: imageWidth,
+                    height: imageHeight,
+                    child: widget.child,
+                  ),
                 ),
               ),
             ),

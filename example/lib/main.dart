@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo ImageButton Widget'),
+      home: const MyHomePage(title: 'Demo PictureButton Widget'),
     );
   }
 }
@@ -52,54 +52,90 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            // Center is a layout widget. It takes a single child and positions it
+            // in the middle of the parent.
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('count\n$_counter',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 32.0,),
+                const Text("anything parameters setting"),
+                PictureButton(
+                  onPressed: counting,
+                  image: Image.asset("assets/google_sign_image.png").image,
+                ),
+                gap,
+        
+                const Text("anything parameter setting\n(width:250 in Colum Defined Width parent Widget)"),
+                Container(
+                  width: 250,
+                  color: Colors.black26.withOpacity(0.1),
+                  padding: const EdgeInsets.all(6.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PictureButton(
+                        onPressed: () {
+                          setState(() {
+                            _counter++;
+                          });
+                        },
+                        image: const AssetImage("assets/google_sign_image.png"),
+                      ),
+                      gap,
+                      const Text("width:100, height:100, fit:BoxFit.fill"),
+                      PictureButton(
+                        onPressed: counting,
+                        image: const AssetImage("assets/google_sign_image.png"),
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.fill,
+                      ),
+                      gap,
+                      const Text("param bubbleEffect: true"),
+                      PictureButton(
+                        onPressed: counting,
+                        image: const AssetImage("assets/google_sign_image.png"),
+                        bubbleEffect: true,
+                      ),
+                    ],
+                  ),
+                ),
+                gap,
+                const Text("no ripple effect\nparam highlightColor: Colors.transparent"),
+                PictureButton(
+                  onPressed: counting,
+                  image: Image.asset("assets/google_sign_image.png").image,
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  bubbleEffect: true,
+                )
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("test"),
-            ),
-            PictureButton(
-              onPressed: () {
-                setState(() {
-                  _counter++;
-                });
-              },
-              image: Image.asset("assets/google_sign_image.png").image,
-            ),
-            const SizedBox(height: 20.0,),
-
-            SizedBox(
-              width: 250,
-              child: Column(
-                children: [
-                  Text("Image Defined Width parent Widget"),
-                  PictureButton(
-                    onPressed: () {
-                      setState(() {
-                        _counter++;
-                      });
-                    },
-                    image: AssetImage("assets/google_sign_image.png"),
-                  )
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  void counting() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  Widget get gap => const SizedBox(height: 20,);
 }
