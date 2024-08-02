@@ -11,35 +11,35 @@ class PictureButton extends StatefulWidget {
   /// -
   ///
   /// required parameters are [[onPressed]], [[image]].
-  const PictureButton({
-    super.key,
-    required this.onPressed,
-    this.onLongPressed,
-    required this.image,
-    this.width,
-    this.height,
-    this.fit = BoxFit.contain,
-    this.opacity = 1.0,
-    this.border,
-    this.borderRadius,
-    this.borderRadiusInk,
-    this.paddingInk = EdgeInsets.zero,
-    this.imageBackgroundColor,
-    this.splashColor,
-    this.highlightColor,
-    this.focusColor,
-    this.hoverColor,
-    this.enabled = true,
-    this.useBubbleEffect = false,
-    this.bubbleEffect = PictureBubbleEffect.shrink,
-
-    this.child
-  }): assert(child is! Container, "Don't use widget child Container");
+  const PictureButton(
+      {super.key,
+      required this.onPressed,
+      this.onLongPressed,
+      required this.image,
+      this.width,
+      this.height,
+      this.fit = BoxFit.contain,
+      this.opacity = 1.0,
+      this.border,
+      this.borderRadius,
+      this.borderRadiusInk,
+      this.paddingInk = EdgeInsets.zero,
+      this.imageBackgroundColor,
+      this.splashColor,
+      this.highlightColor,
+      this.focusColor,
+      this.hoverColor,
+      this.enabled = true,
+      this.useBubbleEffect = false,
+      this.bubbleEffect = PictureBubbleEffect.shrink,
+      this.child})
+      : assert(child is! Container, "Don't use widget child Container");
 
   /// like onTap event.
   ///
   /// [onPressed] function is VoidCallback type.
   final VoidCallback onPressed;
+
   /// [onLongPressed] function is VoidCallback type.
   ///
   /// it is not required.
@@ -48,6 +48,7 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is 'null'
   final VoidCallback? onLongPressed;
+
   /// ImageProvider type
   /// you should ImageProvider,
   ///
@@ -69,6 +70,7 @@ class PictureButton extends StatefulWidget {
   /// file image : FileImage([[IMAGE_PATH]])
   /// memory(Uint8List - from. typed_data.dart) image : MemoryImage([[Uint8List bytes]])
   final ImageProvider image;
+
   /// setting Image [width]
   /// type double
   ///
@@ -76,6 +78,7 @@ class PictureButton extends StatefulWidget {
   ///
   /// if [width] is not defined, ImageProvider will find Size itself.
   final double? width;
+
   /// setting Image [height]
   /// type double
   ///
@@ -83,10 +86,12 @@ class PictureButton extends StatefulWidget {
   ///
   /// if [height] is not defined, ImageProvider will find Size itself.
   final double? height;
+
   /// Image BoxFit
   ///
   /// default is BoxFit.contain
   final BoxFit fit;
+
   /// ImageButton's measure opacity
   ///
   /// -
@@ -98,6 +103,7 @@ class PictureButton extends StatefulWidget {
   /// if you define [enabled] property return 'false'
   /// and do not define [opacity] return value '0.7'
   final double opacity;
+
   /// Box Border,
   /// setting Image's outlined Border
   ///
@@ -112,11 +118,13 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is null
   final Border? border;
+
   /// Box Border Radius
   ///
   /// PictureButton Widget's BorderRadius
   /// default is BorderRadius.circular(8.0)
   final BorderRadius? borderRadius;
+
   /// when you [onPressed], [onLongPressed]
   /// setting this [borderRadiusInk]
   ///
@@ -128,6 +136,7 @@ class PictureButton extends StatefulWidget {
   /// first, [borderRadius] require Widget base border.
   /// second, [borderRadiusInl] require effect in Widget base border.
   final BorderRadius? borderRadiusInk;
+
   /// when you tapped[onPressed] that can you show Event splash, highlight.
   /// there area say 'Ink'
   ///
@@ -137,6 +146,7 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is [EdgeInsets.zero]
   final EdgeInsetsGeometry paddingInk;
+
   /// [imageBackgroundColor] behind [image] color.
   ///
   /// -
@@ -145,17 +155,21 @@ class PictureButton extends StatefulWidget {
   /// I recommend imageBackgroundColor Colors.transparent :)
   /// when exist only image, that is pretty.
   final Color? imageBackgroundColor;
+
   /// [onPressed] onTap event color
   ///
   /// get ripple effect. touch event.
   final Color? splashColor;
+
   /// [onPressed] stay event color
   ///
   /// get stay touched event.
   final Color? highlightColor;
+
   /// if you hardware keyboard or another things.
   /// direction focusing Color event.
   final Color? focusColor;
+
   /// hover color is onFocused mouse point or pen pointer.
   ///
   /// -
@@ -163,6 +177,7 @@ class PictureButton extends StatefulWidget {
   /// if you only touch hands, should not use this.
   /// but if you control others, should use this :)
   final Color? hoverColor;
+
   /// [PictureButton] define Enabled
   ///
   /// if enabled is 'false' don't use onPressed and change down tone color
@@ -171,6 +186,7 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is 'true'
   final bool enabled;
+
   /// if you onPressed Event PictureButton Widget,
   /// Widget show you bubble effect.
   ///
@@ -182,6 +198,7 @@ class PictureButton extends StatefulWidget {
   ///
   /// [useBubbleEffect] default is 'false'
   final bool useBubbleEffect;
+
   /// [PictureBubbleEffect] shrink, expanded options.
   /// [shrink] is scale down 1.00 → 0.95
   ///
@@ -191,7 +208,6 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is [PictureBubbleEffect.shrink]
   final PictureBubbleEffect? bubbleEffect;
-
 
   /// User defined Widget on PictureButton.
   ///
@@ -203,16 +219,20 @@ class PictureButton extends StatefulWidget {
   State<PictureButton> createState() => _PictureButtonState();
 }
 
-class _PictureButtonState extends State<PictureButton> with PictureButtonMixinProtocol {
+class _PictureButtonState extends State<PictureButton>
+    with PictureButtonMixinProtocol {
   /// real image size
   ui.Image? imageInfo;
+
   /// purpose. check Image real size check
   late final ImageStream imageStream;
+
   ///
   late final ImageStreamListener imageStreamListener;
 
   /// BoxFit.contain image display width size
   double? imageDisplayWidth;
+
   /// BoxFit.contain image display height size
   double? imageDisplayHeight;
 
@@ -220,10 +240,12 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
   ///
   /// control onTapUp, onTapDown functions.
   double animScale = 1.00;
+
   /// this [bubbleEffect] default value
   ///
   /// [PictureBubbleEffect.shrink] use this
   final double animScaleShrink = 0.95;
+
   /// [PictureBubbleEffect.expanded] use this
   final double animScaleExpand = 1.05;
 
@@ -282,8 +304,10 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
                     if (widget.useBubbleEffect) {
                       setState(() {
                         // animScale = 1.05;
-                        animScale = widget.bubbleEffect == PictureBubbleEffect.shrink ?
-                          animScaleShrink : animScaleExpand;
+                        animScale =
+                            widget.bubbleEffect == PictureBubbleEffect.shrink
+                                ? animScaleShrink
+                                : animScaleExpand;
                       });
                     }
                   },
@@ -301,7 +325,6 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
                       });
                     }
                   },
-
                   splashColor: widget.splashColor,
                   highlightColor: widget.highlightColor,
                   focusColor: widget.focusColor,
@@ -322,7 +345,6 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
     );
   }
 
-
   /// ImageProvider's real sizes.
   ///
   /// example) assets/google_sign_image.png : 567x132
@@ -330,7 +352,8 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
   Future<void> loadImageInfo() async {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       imageStream = widget.image.resolve(ImageConfiguration.empty);
-      imageStreamListener = ImageStreamListener((ImageInfo imageInfo, bool synchronousCall) {
+      imageStreamListener =
+          ImageStreamListener((ImageInfo imageInfo, bool synchronousCall) {
         setState(() {
           this.imageInfo = imageInfo.image;
           // if you want Log resolve this annotation :)
@@ -346,7 +369,6 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
       imageStream.addListener(imageStreamListener);
     });
   }
-
 
   /// calculate image ratio to displaySize.
   ///
@@ -367,9 +389,13 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
     /// if widget.width is smaller than constraints.maxWidth
     /// choice widget.width
     if (widget.width != null) {
-      widgetWidth = widget.width! <= constraints.maxWidth ? widget.width! : constraints.maxWidth;
+      widgetWidth = widget.width! <= constraints.maxWidth
+          ? widget.width!
+          : constraints.maxWidth;
     } else {
-      widgetWidth = constraints.maxWidth <= imageInfo!.width.toDouble() ? constraints.maxWidth : imageInfo!.width.toDouble();
+      widgetWidth = constraints.maxWidth <= imageInfo!.width.toDouble()
+          ? constraints.maxWidth
+          : imageInfo!.width.toDouble();
     }
 
     /// if widget.height exist
@@ -378,13 +404,17 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
     /// if widget.width is smaller than constraints.maxHeight
     /// choice widget.height
     if (widget.height != null) {
-      widgetHeight = widget.height! <= constraints.maxHeight ? widget.height! : constraints.maxHeight;
+      widgetHeight = widget.height! <= constraints.maxHeight
+          ? widget.height!
+          : constraints.maxHeight;
     } else {
-      widgetHeight = constraints.maxHeight <= imageInfo!.height.toDouble() ? constraints.maxHeight : imageInfo!.height.toDouble();
+      widgetHeight = constraints.maxHeight <= imageInfo!.height.toDouble()
+          ? constraints.maxHeight
+          : imageInfo!.height.toDouble();
     }
 
     final double widthRatio = widgetWidth / imageInfo!.width.toDouble();
-    final double heightRatio = widgetHeight  / imageInfo!.height.toDouble();
+    final double heightRatio = widgetHeight / imageInfo!.height.toDouble();
 
     // if you want Log resolve this annotation :)
     // debugPrint("constraint maxWidth:${constraints.maxWidth}");
@@ -398,10 +428,8 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
     // choice more than smaller Ratio
     final double scale = widthRatio < heightRatio ? widthRatio : heightRatio;
 
-    return Size(
-      imageInfo!.width.toDouble() * scale,
-      imageInfo!.height.toDouble() * scale
-    );
+    return Size(imageInfo!.width.toDouble() * scale,
+        imageInfo!.height.toDouble() * scale);
   }
 
   /// define [imageWidth]
@@ -410,8 +438,7 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
     double? width;
     if (widget.fit == BoxFit.cover ||
         widget.fit == BoxFit.fill ||
-        widget.fit == BoxFit.fitWidth
-    ) {
+        widget.fit == BoxFit.fitWidth) {
       // filled image area
       width = widget.width ?? imageInfo?.width.toDouble();
     } else {
@@ -433,8 +460,7 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
     double? height;
     if (widget.fit == BoxFit.cover ||
         widget.fit == BoxFit.fill ||
-        widget.fit == BoxFit.fitHeight
-    ) {
+        widget.fit == BoxFit.fitHeight) {
       // filled image area
       height = widget.height ?? imageInfo?.height.toDouble();
     } else {

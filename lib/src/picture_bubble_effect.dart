@@ -10,6 +10,7 @@ enum PictureBubbleEffect {
   ///
   /// scale to 0.95
   shrink,
+
   /// effect animation to outside
   ///
   /// scale to 1.05

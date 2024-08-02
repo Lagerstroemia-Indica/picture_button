@@ -56,19 +56,22 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('count\n$_counter',
+                Text(
+                  'count\n$_counter',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                const SizedBox(height: 32.0,),
+                const SizedBox(
+                  height: 32.0,
+                ),
                 const Text("anything parameters setting"),
                 PictureButton(
                   onPressed: counting,
                   image: Image.asset("assets/google_sign_image.png").image,
                 ),
                 gap,
-        
-                const Text("anything parameter setting\n(width:250 in Colum Defined Width parent Widget)"),
+                const Text(
+                    "anything parameter setting\n(width:250 in Colum Defined Width parent Widget)"),
                 Container(
                   width: 250,
                   color: Colors.black26.withOpacity(0.1),
@@ -108,8 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     "highlightColor: Colors.transparent\n"
                     "splashColor: Colors.transparent\n"
                     "useBubbleEffect: true\n"
-                    "bubbleEffect: PictureBubbleEffect.expanded,"
-                ),
+                    "bubbleEffect: PictureBubbleEffect.expanded,"),
                 PictureButton(
                   onPressed: counting,
                   image: Image.asset("assets/google_sign_image.png").image,
@@ -137,5 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Widget get gap => const SizedBox(height: 16,);
+  Widget get gap => const SizedBox(
+        height: 16,
+      );
 }
