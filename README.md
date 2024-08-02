@@ -1,4 +1,4 @@
-<!--
+f<!--
 This README describes the package. If you publish this package to pub.dev,
 this README's contents appear on the landing page for your package.
 
@@ -48,12 +48,12 @@ flutter:
 
 #### add
 ```text
-flutter pub add image_button
+flutter pub add picture_button
 ```
 
 #### import
 ```dart
-import 'package:image_button/picture_button.dart';
+import 'package:picture_button/picture_button.dart';
 ```
 
 <br/>
@@ -89,12 +89,12 @@ import 'package:image_button/picture_button.dart';
 #### 👨‍👩‍👧‍👦 AssetImage(..), NetworkImage(..), FileImage(..), MemoryImage(..)
 
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    image: const AssetImage("assets/google_sign_image.png"),
-  ),
+ PictureButton(
+   onPressed: () {
+     
+   },
+   image: const AssetImage("assets/google_sign_image.png"),
+ ),
 ```
 <br/>
 
@@ -103,26 +103,26 @@ use later `.image` getter function.
 
 
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    image: Image.asset("assets/google_sign_image.png").image,
-  ),
+ PictureButton(
+   onPressed: () {
+     
+   },
+   image: Image.asset("assets/google_sign_image.png").image,
+ ),
 ```
 <br/>
 
 #### 🛀 Bubble Effect
 `useBubbleEffect: true`
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    image: Image.asset("assets/google_sign_image.png").image,
-    useBubbleEffect: true,
-    bubbleEffect: PictureBubbleEffect.shrink, // [shrink, expand]
-  ),
+ PictureButton(
+   onPressed: () {
+     
+   },
+   image: Image.asset("assets/google_sign_image.png").image,
+   useBubbleEffect: true,
+   bubbleEffect: PictureBubbleEffect.shrink, // [shrink, expand]
+ ),
 ```
 
 <br/>
@@ -131,14 +131,14 @@ use later `.image` getter function.
 `splashColor: Colors.transparent` <br/>
 `highlightColor: Colors.transparent` <br/>
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    image: Image.asset("assets/google_sign_image.png").image,
-    highlightColor: Colors.transparent,
-    splashColor: Colors.transparent,
-  ),
+ PictureButton(
+   onPressed: () {
+     
+   },
+   image: Image.asset("assets/google_sign_image.png").image,
+   highlightColor: Colors.transparent,
+   splashColor: Colors.transparent,
+ ),
 ```
 
 <br/>
@@ -146,12 +146,12 @@ use later `.image` getter function.
 #### ✂ measure Effect(Ripple) BorderRadius
 `borderRadiusInk: BorderRadius.circular(8.0)`
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    image: Image.asset("assets/google_sign_image.png").image,
-    borderRadiusInk: BorderRadius.circular(8.0),
-    // paddingInk: EdgeInsets.all(8.0),   if you want measure 'Ink' padding.
-  ),
+ PictureButton(
+   onPressed: () {
+     
+   },
+   image: Image.asset("assets/google_sign_image.png").image,
+   borderRadiusInk: BorderRadius.circular(8.0),
+   // paddingInk: EdgeInsets.all(8.0),   if you want measure 'Ink' padding.
+ ),
 ```

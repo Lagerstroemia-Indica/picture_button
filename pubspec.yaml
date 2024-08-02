@@ -1,6 +1,6 @@
 name: picture_button
 description: "Flutter PictureButton Widget, If you just put the image inside PictureButton, you can use it like a other button"
-version: 0.0.3
+version: 0.0.4
 repository: https://github.com/b3lon9/picture_button
 
 environment:
