@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:picture_button/src/picture_bubble_effect.dart';
 import './picture_button_mixin_protocol.dart';
 
 class PictureButton extends StatefulWidget {
@@ -13,6 +14,7 @@ class PictureButton extends StatefulWidget {
   const PictureButton({
     super.key,
     required this.onPressed,
+    this.onLongPressed,
     required this.image,
     this.width,
     this.height,
@@ -26,8 +28,10 @@ class PictureButton extends StatefulWidget {
     this.splashColor,
     this.highlightColor,
     this.focusColor,
+    this.hoverColor,
     this.enabled = true,
-    this.bubbleEffect = false,
+    this.useBubbleEffect = false,
+    this.bubbleEffect = PictureBubbleEffect.shrink,
 
     this.child
   }): assert(child is! Container, "Don't use widget child Container");
@@ -36,6 +40,14 @@ class PictureButton extends StatefulWidget {
   ///
   /// [onPressed] function is VoidCallback type.
   final VoidCallback onPressed;
+  /// [onLongPressed] function is VoidCallback type.
+  ///
+  /// it is not required.
+  ///
+  /// -
+  ///
+  /// default is 'null'
+  final VoidCallback? onLongPressed;
   /// ImageProvider type
   /// you should ImageProvider,
   ///
@@ -144,6 +156,13 @@ class PictureButton extends StatefulWidget {
   /// if you hardware keyboard or another things.
   /// direction focusing Color event.
   final Color? focusColor;
+  /// hover color is onFocused mouse point or pen pointer.
+  ///
+  /// -
+  ///
+  /// if you only touch hands, should not use this.
+  /// but if you control others, should use this :)
+  final Color? hoverColor;
   /// [PictureButton] define Enabled
   ///
   /// if enabled is 'false' don't use onPressed and change down tone color
@@ -161,11 +180,23 @@ class PictureButton extends StatefulWidget {
   ///
   /// -
   ///
-  /// [bubbleEffect] default is 'false'
-  final bool bubbleEffect;
+  /// [useBubbleEffect] default is 'false'
+  final bool useBubbleEffect;
+  /// [PictureBubbleEffect] shrink, expanded options.
+  /// [shrink] is scale down 1.00 → 0.95
+  ///
+  /// [expanded] is scale up 1.00 → 1.05
+  ///
+  /// -
+  ///
+  /// default is [PictureBubbleEffect.shrink]
+  final PictureBubbleEffect? bubbleEffect;
 
 
   /// User defined Widget on PictureButton.
+  ///
+  /// do not support [Container] widget.
+  /// debug mode block it.
   final Widget? child;
 
   @override
@@ -185,7 +216,16 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
   /// BoxFit.contain image display height size
   double? imageDisplayHeight;
 
-  double animScale = 1.0;
+  /// AnimationScale Control scale size.
+  ///
+  /// control onTapUp, onTapDown functions.
+  double animScale = 1.00;
+  /// this [bubbleEffect] default value
+  ///
+  /// [PictureBubbleEffect.shrink] use this
+  final double animScaleShrink = 0.95;
+  /// [PictureBubbleEffect.expanded] use this
+  final double animScaleExpand = 1.05;
 
   @override
   void initState() {
@@ -216,6 +256,7 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
 
           return AnimatedScale(
             scale: animScale,
+            curve: Curves.easeOutCubic,
             duration: const Duration(milliseconds: 100),
             child: Container(
               constraints: constraints,
@@ -236,30 +277,35 @@ class _PictureButtonState extends State<PictureButton> with PictureButtonMixinPr
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: widget.enabled ? widget.onPressed : null,
+                  onLongPress: widget.onLongPressed,
                   onTapDown: (details) {
-                    if (widget.bubbleEffect) {
+                    if (widget.useBubbleEffect) {
                       setState(() {
-                        animScale = 1.05;
+                        // animScale = 1.05;
+                        animScale = widget.bubbleEffect == PictureBubbleEffect.shrink ?
+                          animScaleShrink : animScaleExpand;
                       });
                     }
                   },
                   onTapUp: (details) {
-                    if (widget.bubbleEffect) {
+                    if (widget.useBubbleEffect) {
                       setState(() {
-                        animScale = 1.0;
+                        animScale = 1.00;
                       });
                     }
                   },
                   onTapCancel: () {
-                    if (widget.bubbleEffect) {
+                    if (widget.useBubbleEffect) {
                       setState(() {
-                        animScale = 1.0;
+                        animScale = 1.00;
                       });
                     }
                   },
+
                   splashColor: widget.splashColor,
                   highlightColor: widget.highlightColor,
                   focusColor: widget.focusColor,
+                  hoverColor: widget.hoverColor,
                   borderRadius: widget.borderRadiusInk ?? widget.borderRadius,
                   enableFeedback: widget.enabled,
                   child: SizedBox(

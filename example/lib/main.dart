@@ -34,12 +34,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Center(
             // Center is a layout widget. It takes a single child and positions it
             // in the middle of the parent.
@@ -100,23 +94,29 @@ class _MyHomePageState extends State<MyHomePage> {
                         fit: BoxFit.fill,
                       ),
                       gap,
-                      const Text("param bubbleEffect: true"),
+                      const Text("useBubbleEffect: true"),
                       PictureButton(
                         onPressed: counting,
                         image: const AssetImage("assets/google_sign_image.png"),
-                        bubbleEffect: true,
+                        useBubbleEffect: true,
                       ),
                     ],
                   ),
                 ),
                 gap,
-                const Text("no ripple effect\nparam highlightColor: Colors.transparent"),
+                const Text("[only ripple effect]\n"
+                    "highlightColor: Colors.transparent\n"
+                    "splashColor: Colors.transparent\n"
+                    "useBubbleEffect: true\n"
+                    "bubbleEffect: PictureBubbleEffect.expanded,"
+                ),
                 PictureButton(
                   onPressed: counting,
                   image: Image.asset("assets/google_sign_image.png").image,
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
-                  bubbleEffect: true,
+                  useBubbleEffect: true,
+                  bubbleEffect: PictureBubbleEffect.expand,
                 )
               ],
             ),
@@ -137,5 +137,5 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Widget get gap => const SizedBox(height: 20,);
+  Widget get gap => const SizedBox(height: 16,);
 }
