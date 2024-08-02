@@ -15,6 +15,8 @@ and the Flutter guide for
 PictureButton is setting only Image(ImageProvider type) and onPressed. like ButtonStyle. <br/>
 I am very happy that I somehow seem to have deployed a useful widget.
 
+<br/>
+
 ## Features 🍜
 
 <img src="https://github.com/user-attachments/assets/345ed222-5e38-4149-ab01-5905fa0c12f2" alt="GIF" width="320">
@@ -84,7 +86,7 @@ import 'package:image_button/picture_button.dart';
 
 <br/>
 
-#### 👨‍👩‍👧‍👦 AssetImage, NetworkImage, FileImage, MemoryImage
+#### 👨‍👩‍👧‍👦 AssetImage(..), NetworkImage(..), FileImage(..), MemoryImage(..)
 
 ```dart
   PictureButton(
@@ -110,7 +112,7 @@ use later `.image` getter function.
 ```
 <br/>
 
-#### 🛀 Bubble Effect(Ripple)
+#### 🛀 Bubble Effect
 `useBubbleEffect: true`
 ```dart
   PictureButton(
@@ -125,7 +127,7 @@ use later `.image` getter function.
 
 <br/>
 
-#### 🖌 if you don't want Effect Color (I said 'Ink')
+#### 🖌 if you don't want Effect(Ripple) Color (I said 'Ink')
 `splashColor: Colors.transparent` <br/>
 `highlightColor: Colors.transparent` <br/>
 ```dart
@@ -141,7 +143,7 @@ use later `.image` getter function.
 
 <br/>
 
-#### ✂ measure Effect BorderRadius
+#### ✂ measure Effect(Ripple) BorderRadius
 `borderRadiusInk: BorderRadius.circular(8.0)`
 ```dart
   PictureButton(
