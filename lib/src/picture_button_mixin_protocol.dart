@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_button/image_button_library.dart';
+import './picture_button.dart';
 
-mixin ImageButtonMixinProtocol on State<ImageButton>{
+mixin PictureButtonMixinProtocol on State<PictureButton>{
   /// ui.Image's data
   ///
   /// how import?

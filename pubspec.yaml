@@ -1,7 +1,7 @@
-name: image_button
-description: "Flutter ImageButton Widget"
+name: picture_button
+description: "Flutter PictureButton Widget"
 version: 0.0.1
-homepage:
+repository: https://github.com/b3lon9/picture_button
 
 environment:
   sdk: '>=3.4.3 <4.0.0'

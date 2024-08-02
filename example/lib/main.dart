@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_button/image_button_library.dart';
+import 'package:picture_button/picture_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo ImageButton Widget'),
     );
   }
 }
@@ -58,22 +58,40 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            ImageButton(
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("test"),
+            ),
+            PictureButton(
               onPressed: () {
-
+                setState(() {
+                  _counter++;
+                });
               },
               image: Image.asset("assets/google_sign_image.png").image,
-              fit: BoxFit.fill,
-              width: 200,
-              height: 200,
             ),
+            const SizedBox(height: 20.0,),
+
+            SizedBox(
+              width: 250,
+              child: Column(
+                children: [
+                  Text("Image Defined Width parent Widget"),
+                  PictureButton(
+                    onPressed: () {
+                      setState(() {
+                        _counter++;
+                      });
+                    },
+                    image: AssetImage("assets/google_sign_image.png"),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

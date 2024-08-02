@@ -1,9 +1,16 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:image_button/src/image_button_mixin_protocol.dart';
+import 'package:picture_button/src/picture_button_mixin_protocol.dart';
 
-class ImageButton extends StatefulWidget {
-  const ImageButton({
+class PictureButton extends StatefulWidget {
+  /// thank you so much use this :)
+  /// have good luck !
+  /// when you need another things once write Github issue.
+  ///
+  /// -
+  ///
+  /// required parameters are [[onPressed]], [[image]].
+  const PictureButton({
     super.key,
     required this.onPressed,
     required this.image,
@@ -11,8 +18,10 @@ class ImageButton extends StatefulWidget {
     this.height,
     this.fit = BoxFit.contain,
     this.opacity = 1.0,
+    this.border,
     this.borderRadius,
     this.borderRadiusInk,
+    this.paddingInk = EdgeInsets.zero,
     this.imageBackgroundColor,
     this.splashColor,
     this.highlightColor,
@@ -36,7 +45,7 @@ class ImageButton extends StatefulWidget {
   ///
   /// their use 'image' property that is return ImageProvider type
   /// ex) final image = Image.network("https://bit.ly/example_image_12345").image
-  ///     ImageButton(
+  ///     PictureButton(
   ///       onPressed: () {
   ///       },
   ///       image: image,
@@ -77,22 +86,45 @@ class ImageButton extends StatefulWidget {
   /// if you define [enabled] property return 'false'
   /// and do not define [opacity] return value '0.7'
   final double opacity;
+  /// Box Border,
+  /// setting Image's outlined Border
+  ///
+  /// -
+  ///
+  /// ex) Border.all(
+  ///       color: Colors.black,
+  ///       width: 3.0,
+  ///     )
+  ///
+  /// -
+  ///
+  /// default is null
+  final Border? border;
   /// Box Border Radius
   ///
-  /// ImageButton Widget's BorderRadius
+  /// PictureButton Widget's BorderRadius
   /// default is BorderRadius.circular(8.0)
   final BorderRadius? borderRadius;
   /// when you [onPressed], [onLongPressed]
   /// setting this [borderRadiusInk]
   ///
   /// why am I define property name add 'Ink',
-  /// once ImageButton Widget need two borderRadius.
+  /// once PictureButton Widget need two borderRadius.
   ///
   /// -
   ///
   /// first, [borderRadius] require Widget base border.
   /// second, [borderRadiusInl] require effect in Widget base border.
   final BorderRadius? borderRadiusInk;
+  /// when you tapped[onPressed] that can you show Event splash, highlight.
+  /// there area say 'Ink'
+  ///
+  /// this [paddingInk] define to there area.
+  ///
+  /// -
+  ///
+  /// default is [EdgeInsets.zero]
+  final EdgeInsetsGeometry paddingInk;
   /// [imageBackgroundColor] behind [image] color.
   ///
   /// -
@@ -112,7 +144,7 @@ class ImageButton extends StatefulWidget {
   /// if you hardware keyboard or another things.
   /// direction focusing Color event.
   final Color? focusColor;
-  /// [ImageButton] define Enabled
+  /// [PictureButton] define Enabled
   ///
   /// if enabled is 'false' don't use onPressed and change down tone color
   ///
@@ -120,7 +152,7 @@ class ImageButton extends StatefulWidget {
   ///
   /// default is 'true'
   final bool enabled;
-  /// if you onPressed Event ImageButton Widget,
+  /// if you onPressed Event PictureButton Widget,
   /// Widget show you bubble effect.
   ///
   /// -
@@ -130,14 +162,14 @@ class ImageButton extends StatefulWidget {
   final bool bubbleEffect;
 
 
-  /// User defined Widget on ImageButton.
+  /// User defined Widget on PictureButton.
   final Widget? child;
 
   @override
-  State<ImageButton> createState() => _ImageButtonState();
+  State<PictureButton> createState() => _PictureButtonState();
 }
 
-class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol{
+class _PictureButtonState extends State<PictureButton> with PictureButtonMixinProtocol{
   /// real image size
   ui.Image? imageInfo;
   /// purpose. check Image real size check
@@ -176,6 +208,7 @@ class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol
             constraints: constraints,
             // width: width ?? constraints.maxWidth,
             // height: height ?? constraints.maxHeight,
+            padding: widget.paddingInk,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: widget.image,
@@ -183,6 +216,7 @@ class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol
                 opacity: widget.opacity,
               ),
               color: widget.imageBackgroundColor,
+              border: widget.border,
               borderRadius: widget.borderRadius,
             ),
             child: Material(
@@ -218,10 +252,11 @@ class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol
       imageStreamListener = ImageStreamListener((ImageInfo imageInfo, bool synchronousCall) {
         setState(() {
           this.imageInfo = imageInfo.image;
-          debugPrint("[---REAL IMAGE SIZE ---]");
-          debugPrint("imageInfo width:${this.imageInfo!.width}");
-          debugPrint("imageInfo height:${this.imageInfo!.height}");
-          debugPrint("[------------------ ---]");
+          // if you want Log resolve this annotation :)
+          // debugPrint("[---REAL IMAGE SIZE ---]");
+          // debugPrint("imageInfo width:${this.imageInfo!.width}");
+          // debugPrint("imageInfo height:${this.imageInfo!.height}");
+          // debugPrint("[------------------ ---]");
         });
 
         imageStream.removeListener(imageStreamListener);
@@ -267,17 +302,18 @@ class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol
       widgetHeight = constraints.maxHeight <= imageInfo!.height.toDouble() ? constraints.maxHeight : imageInfo!.height.toDouble();
     }
 
-    debugPrint("constraint maxWidth:${constraints.maxWidth}");
-    debugPrint("constraint maxHeight:${constraints.maxHeight}");
-    debugPrint("calculate widgetWidth:$widgetWidth");
-    debugPrint("calculate widgetHeight:$widgetHeight");
-    debugPrint("-------------------------------------");
     final double widthRatio = widgetWidth / imageInfo!.width.toDouble();
     final double heightRatio = widgetHeight  / imageInfo!.height.toDouble();
 
-    debugPrint("widthRatio:$widthRatio");
-    debugPrint("heightRatio:$heightRatio");
-    debugPrint("-------------------------------------");
+    // if you want Log resolve this annotation :)
+    // debugPrint("constraint maxWidth:${constraints.maxWidth}");
+    // debugPrint("constraint maxHeight:${constraints.maxHeight}");
+    // debugPrint("calculate widgetWidth:$widgetWidth");
+    // debugPrint("calculate widgetHeight:$widgetHeight");
+    // debugPrint("-------------------------------------");
+    // debugPrint("widthRatio:$widthRatio");
+    // debugPrint("heightRatio:$heightRatio");
+    // debugPrint("-------------------------------------");
     // choice more than smaller Ratio
     final double scale = widthRatio < heightRatio ? widthRatio : heightRatio;
 
@@ -302,10 +338,11 @@ class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol
       // contain, fitWidth, fitHeight, scaleDown
       width = imageDisplayWidth;
     }
-    debugPrint("widget.width:${widget.width}");
-    debugPrint("imageInfo?.width.toDouble():${imageInfo?.width.toDouble()}");
-    debugPrint("imageDisplayWidth:$imageDisplayWidth");
-    debugPrint("--->imageWidth:$width");
+    // if you want Log resolve this annotation :)
+    // debugPrint("widget.width:${widget.width}");
+    // debugPrint("imageInfo?.width.toDouble():${imageInfo?.width.toDouble()}");
+    // debugPrint("imageDisplayWidth:$imageDisplayWidth");
+    // debugPrint("--->imageWidth:$width");
     return width;
   }
 
@@ -325,10 +362,11 @@ class _ImageButtonState extends State<ImageButton> with ImageButtonMixinProtocol
       height = imageDisplayHeight;
     }
 
-    debugPrint("widget.height:${widget.height}");
-    debugPrint("imageInfo?.height.toDouble():${imageInfo?.height.toDouble()}");
-    debugPrint("imageDisplayHeight:$imageDisplayHeight");
-    debugPrint("--->imageHeight:$height");
+    // if you want Log resolve this annotation :)
+    // debugPrint("widget.height:${widget.height}");
+    // debugPrint("imageInfo?.height.toDouble():${imageInfo?.height.toDouble()}");
+    // debugPrint("imageDisplayHeight:$imageDisplayHeight");
+    // debugPrint("--->imageHeight:$height");
     return height;
   }
 }
