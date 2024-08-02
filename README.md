@@ -84,7 +84,7 @@ import 'package:image_button/picture_button.dart';
 
 <br/>
 
-#### 👨‍👩‍👧‍👦 AssetImage, NetworkImage, FileImage, MemoryIamge
+#### 👨‍👩‍👧‍👦 AssetImage, NetworkImage, FileImage, MemoryImage
 
 ```dart
   PictureButton(
@@ -118,7 +118,38 @@ use later `.image` getter function.
       
     },
     image: Image.asset("assets/google_sign_image.png").image,
-    bubbleEffect: true,
+    useBubbleEffect: true,
+    bubbleEffect: PictureBubbleEffect.shrink, // [shrink, expand]
   ),
 ```
 
+<br/>
+
+#### 🖌 if you don't want Effect Color (I said 'Ink')
+`splashColor: Colors.transparent` <br/>
+`highlightColor: Colors.transparent` <br/>
+```dart
+  PictureButton(
+    onPressed: () {
+      
+    },
+    image: Image.asset("assets/google_sign_image.png").image,
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
+  ),
+```
+
+<br/>
+
+#### ✂ measure Effect BorderRadius
+`borderRadiusInk: BorderRadius.circular(8.0)`
+```dart
+  PictureButton(
+    onPressed: () {
+      
+    },
+    image: Image.asset("assets/google_sign_image.png").image,
+    borderRadiusInk: BorderRadius.circular(8.0),
+    // paddingInk: EdgeInsets.all(8.0),   if you want measure 'Ink' padding.
+  ),
+```
