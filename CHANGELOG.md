@@ -1,3 +1,6 @@
+## 0.0.6
+* add parameter that is 'margin'
+
 ## 0.0.5
 * modify imageBackgroundColor → backgroundColor
 * remove /example/ folder name in README.md

@@ -19,6 +19,7 @@ class PictureButton extends StatefulWidget {
       this.width,
       this.height,
       this.fit = BoxFit.contain,
+      this.margin,
       this.opacity = 1.0,
       this.border,
       this.borderRadius,
@@ -91,6 +92,18 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is BoxFit.contain
   final BoxFit fit;
+
+  /// PictureButton's margin
+  /// you should not add gap widget.
+  ///
+  /// [EdgeInsets] type
+  ///
+  /// ex) margin: EdgeInsets.all(8.0),
+  ///
+  /// -
+  ///
+  /// default is null
+  final EdgeInsets? margin;
 
   /// ImageButton's measure opacity
   ///
@@ -284,6 +297,7 @@ class _PictureButtonState extends State<PictureButton>
               constraints: constraints,
               // width: width ?? constraints.maxWidth,
               // height: height ?? constraints.maxHeight,
+              margin: widget.margin,
               padding: widget.paddingInk,
               decoration: BoxDecoration(
                 image: DecorationImage(

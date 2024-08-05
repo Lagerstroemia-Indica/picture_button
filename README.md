@@ -69,6 +69,7 @@ import 'package:picture_button/picture_button.dart';
 | width           | :x:                 | double?              | imageWidth                 |
 | height          | :x:                 | double?              | imageHieght                |
 | fit             | :x:                 | BoxFit               | BoxFit.contain             |
+| margin          | :x:                 | EdgeInsets?          |                            |
 | opacity         | :x:                 | double               | 1.0                        |
 | border          | :x:                 | Border?              |                            |
 | borderRadius    | :x:                 | BorderRadius?        |                            |
