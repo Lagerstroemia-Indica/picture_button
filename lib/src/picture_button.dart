@@ -458,7 +458,7 @@ class _PictureButtonState extends State<PictureButton>
     } else {
       // scaleDown image area
       // contain, fitWidth, fitHeight, scaleDown
-      width = imageDisplayWidth;
+      width = widget.width ?? imageDisplayWidth;
     }
     // if you want Log resolve this annotation :)
     // debugPrint("widget.width:${widget.width}");
@@ -480,7 +480,7 @@ class _PictureButtonState extends State<PictureButton>
     } else {
       // scaleDown image area
       // contain, fitWidth,  scaleDown
-      height = imageDisplayHeight;
+      height = widget.height ?? imageDisplayHeight;
     }
 
     // if you want Log resolve this annotation :)

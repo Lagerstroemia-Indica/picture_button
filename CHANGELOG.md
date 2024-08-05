@@ -1,3 +1,6 @@
+## 0.0.7
+* fix measure user default image's width, height. 
+
 ## 0.0.6
 * add parameter that is 'margin'
 
