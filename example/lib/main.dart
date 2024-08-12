@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     "highlightColor: Colors.transparent\n"
                     "splashColor: Colors.transparent\n"
                     "useBubbleEffect: true\n"
-                    "bubbleEffect: PictureBubbleEffect.expanded,"),
+                    "bubbleEffect: PictureBubbleEffect.expand,"),
                 PictureButton(
                   onPressed: counting,
                   image: Image.asset("assets/google_sign_image.png").image,
@@ -119,6 +119,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   splashColor: Colors.transparent,
                   useBubbleEffect: true,
                   bubbleEffect: PictureBubbleEffect.expand,
+                ),
+                PictureButton(
+                  onPressed: () {},
+                  image: Image.asset("assets/icon_flutter_default.png").image,
+                  imagePressed:
+                      Image.asset("assets/icon_flutter_pressed.png").image,
+                  useBubbleEffect: true,
+                  width: 150,
+                  margin: EdgeInsets.only(top: 16.0),
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
                 )
               ],
             ),

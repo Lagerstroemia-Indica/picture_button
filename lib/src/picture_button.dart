@@ -16,6 +16,7 @@ class PictureButton extends StatefulWidget {
       required this.onPressed,
       this.onLongPressed,
       required this.image,
+      this.imagePressed,
       this.width,
       this.height,
       this.fit = BoxFit.contain,
@@ -71,6 +72,14 @@ class PictureButton extends StatefulWidget {
   /// file image : FileImage([[IMAGE_PATH]])
   /// memory(Uint8List - from. typed_data.dart) image : MemoryImage([[Uint8List bytes]])
   final ImageProvider image;
+
+  /// [image] is default image.
+  ///
+  /// [imagePressed] is [onPressed] image.
+  ///
+  /// when you pressed PictureButton Widget.
+  /// change toggle [image] and [imagePressed] images.
+  final ImageProvider? imagePressed;
 
   /// setting Image [width]
   /// type double
@@ -262,6 +271,9 @@ class _PictureButtonState extends State<PictureButton>
   /// [PictureBubbleEffect.expanded] use this
   final double animScaleExpand = 1.05;
 
+  /// PictureButton Pressed state notify.
+  bool isPressed = false;
+
   @override
   void initState() {
     super.initState();
@@ -301,7 +313,9 @@ class _PictureButtonState extends State<PictureButton>
               padding: widget.paddingInk,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: widget.image,
+                  image: isPressed
+                      ? widget.imagePressed ?? widget.image
+                      : widget.image,
                   fit: widget.fit,
                   opacity: widget.opacity,
                 ),
@@ -315,29 +329,35 @@ class _PictureButtonState extends State<PictureButton>
                   onTap: widget.enabled ? widget.onPressed : null,
                   onLongPress: widget.onLongPressed,
                   onTapDown: (details) {
-                    if (widget.useBubbleEffect) {
-                      setState(() {
+                    setState(() {
+                      if (widget.useBubbleEffect) {
                         // animScale = 1.05;
                         animScale =
                             widget.bubbleEffect == PictureBubbleEffect.shrink
                                 ? animScaleShrink
                                 : animScaleExpand;
-                      });
-                    }
+                      }
+
+                      isPressed = true;
+                    });
                   },
                   onTapUp: (details) {
-                    if (widget.useBubbleEffect) {
-                      setState(() {
+                    setState(() {
+                      if (widget.useBubbleEffect) {
                         animScale = 1.00;
-                      });
-                    }
+                      }
+
+                      isPressed = false;
+                    });
                   },
                   onTapCancel: () {
-                    if (widget.useBubbleEffect) {
-                      setState(() {
+                    setState(() {
+                      if (widget.useBubbleEffect) {
                         animScale = 1.00;
-                      });
-                    }
+                      }
+
+                      isPressed = false;
+                    });
                   },
                   splashColor: widget.splashColor,
                   highlightColor: widget.highlightColor,
