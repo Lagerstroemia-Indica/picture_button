@@ -1,3 +1,6 @@
+## 0.0.8
+* add parameter imagePressed.
+
 ## 0.0.7
 * fix measure user default image's width, height. 
 

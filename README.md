@@ -61,7 +61,7 @@ import 'package:picture_button/picture_button.dart';
 
 ## Update 🍭
 
-add `imagePressed` parameter from `0.8.0` version. <br/>
+add `imagePressed` parameter from `0.0.8` version. <br/>
 you can see the pressed image when you implement `onPressed` event.
 
 <img src="https://github.com/user-attachments/assets/55ddb2bb-6584-43e0-be9c-deedeb7ccd75" alt="GIF" width="150" />
