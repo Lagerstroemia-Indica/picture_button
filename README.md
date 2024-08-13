@@ -70,7 +70,14 @@ if you do not define one, there do not work.
 
 ```dart
   PictureButton(
-  
+    onPressed: () {
+      
+    },
+    onSelectChanged: (isSelected) {
+      
+    },
+    image: Image.asset("assets/icon_flutter_default.png").image,
+    imageSelected: Image.asset("assets/icon_flutter_other.png").image,
   )
 ```
 
@@ -79,30 +86,32 @@ if you do not define one, there do not work.
 
 ## Usage 🚀
 
-| parameter       | required            | type                 | default                    |
-|-----------------|---------------------|----------------------|----------------------------|
-| onPressed       | :heavy_check_mark:  | VoidCallback         |                            |
-| onLongPressed   | :x:                 | VoidCallback?        |                            |
-| image           | :heavy_check_mark:  | ImageProvider        |                            |
-| imagePressed    | :x:                 | ImageProvider?       |                            |
-| width           | :x:                 | double?              | imageWidth                 |
-| height          | :x:                 | double?              | imageHeight                |
-| fit             | :x:                 | BoxFit               | BoxFit.contain             |
-| margin          | :x:                 | EdgeInsets?          |                            |
-| opacity         | :x:                 | double               | 1.0                        |
-| border          | :x:                 | Border?              |                            |
-| borderRadius    | :x:                 | BorderRadius?        |                            |
-| borderRadiusInk | :x:                 | BorderRadius?        |                            |
-| paddingInk      | :x:                 | EdgeInsetGeometry    | EdgeInsets.zero            |
-| backgroundColor | :x:                 | Color?               |                            |
-| splashColor     | :x:                 | Color?               |                            |
-| highlightColor  | :x:                 | Color?               |                            |
-| focusColor      | :x:                 | Color?               |                            |
-| hoverColor      | :x:                 | Color?               |                            |
-| enabled         | :x:                 | bool                 | true                       |
-| useBubbleEffect | :x:                 | bool                 | false                      |
-| bubbleEffect    | :x:                 | PictureBubbleEffect? | PictureBubbleEffect.shrink | 
-| child           | :x:                 | Widget?              |                            |
+| parameter       | required            | type                       | default                    |
+|-----------------|---------------------|----------------------------|----------------------------|
+| onPressed       | :heavy_check_mark:  | VoidCallback               |                            |
+| onLongPressed   | :x:                 | VoidCallback?              |                            |
+| onSelectChanged | :x:                 | Function(bool isSelected)? |                            |
+| image           | :heavy_check_mark:  | ImageProvider              |                            |
+| imagePressed    | :x:                 | ImageProvider?             |                            |
+| imageSelected   | :x:                 | ImageProvider?             |                            |
+| width           | :x:                 | double?                    | imageWidth                 |
+| height          | :x:                 | double?                    | imageHeight                |
+| fit             | :x:                 | BoxFit                     | BoxFit.contain             |
+| margin          | :x:                 | EdgeInsets?                |                            |
+| opacity         | :x:                 | double                     | 1.0                        |
+| border          | :x:                 | Border?                    |                            |
+| borderRadius    | :x:                 | BorderRadius?              |                            |
+| borderRadiusInk | :x:                 | BorderRadius?              |                            |
+| paddingInk      | :x:                 | EdgeInsetGeometry          | EdgeInsets.zero            |
+| backgroundColor | :x:                 | Color?                     |                            |
+| splashColor     | :x:                 | Color?                     |                            |
+| highlightColor  | :x:                 | Color?                     |                            |
+| focusColor      | :x:                 | Color?                     |                            |
+| hoverColor      | :x:                 | Color?                     |                            |
+| enabled         | :x:                 | bool                       | true                       |
+| useBubbleEffect | :x:                 | bool                       | false                      |
+| bubbleEffect    | :x:                 | PictureBubbleEffect?       | PictureBubbleEffect.shrink | 
+| child           | :x:                 | Widget?                    |                            |
 
 <br/>
 
@@ -188,6 +197,7 @@ you can see the pressed image when you implement `onPressed` event.
 ```dart
  PictureButton(
    onPressed: () {
+     
    },
    image: Image.asset("assets/icon_flutter_default.png").image,
    imagePressed: Image.asset("assets/icon_flutter_pressed.png").image,
