@@ -38,6 +38,7 @@ dependencies:
 
   picture_button:
     path: ../
+  flutter_logcat: ^1.2.3
 
 dev_dependencies:
   flutter_test:

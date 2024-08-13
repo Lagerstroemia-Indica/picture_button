@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_logcat/flutter_logcat.dart';
 import 'package:picture_button/picture_button.dart';
 
 void main() {
@@ -33,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +129,36 @@ class _MyHomePageState extends State<MyHomePage> {
                       Image.asset("assets/icon_flutter_pressed.png").image,
                   useBubbleEffect: true,
                   width: 150,
-                  margin: EdgeInsets.only(top: 16.0),
+                  margin: EdgeInsets.symmetric(vertical: 16.0),
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
+                ),
+
+                Text("[isSelectedMode]\n"
+                    "onSelectChanged: (isSelected) { \n"
+                    "   isSelected:$isSelected\n"
+                    "}"),
+                // "image: Image.asset(\"assets/icon_flutter_default.png\").image,\n"
+                // "imageSelected: Image.asset(\"assets/icon_flutter_other.png\").image"),
+                PictureButton(
+                  onPressed: () {
+                    Log.d("onPressed..");
+                  },
+                  onSelectChanged: (isSelected) {
+                    Log.d("onSelectChanged.. isSelected:$isSelected");
+                    setState(() {
+                      this.isSelected = isSelected;
+                    });
+                  },
+                  image: Image.asset("assets/icon_flutter_default.png").image,
+                  imagePressed:
+                      Image.asset("assets/icon_flutter_pressed.png").image,
+                  imageSelected:
+                      Image.asset("assets/icon_flutter_other.png").image,
+                  backgroundColor: Colors.grey,
+                  useBubbleEffect: true,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                 )
               ],
             ),

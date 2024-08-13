@@ -15,8 +15,10 @@ class PictureButton extends StatefulWidget {
       {super.key,
       required this.onPressed,
       this.onLongPressed,
+      this.onSelectChanged,
       required this.image,
       this.imagePressed,
+      this.imageSelected,
       this.width,
       this.height,
       this.fit = BoxFit.contain,
@@ -35,7 +37,16 @@ class PictureButton extends StatefulWidget {
       this.useBubbleEffect = false,
       this.bubbleEffect = PictureBubbleEffect.shrink,
       this.child})
-      : assert(child is! Container, "Don't use widget child Container");
+      : assert(child is! Container, "Don't use widget child Container"),
+        assert(
+            (onSelectChanged != null) == (imageSelected != null),
+            "Each properties define not null, \n"
+            "When imageSelected is not null, \n"
+            "onSelectChanged must not be null. \n"
+            "so you can return PictureButton's selected state.\n"
+            "this error resolve that must define "
+            "[onSelectChanged] and [imageSelected] properties. \n"
+            "like, (imageSelected == null && onSelectChanged == null) || (imageSelected != null && onSelectChanged != null)");
 
   /// like onTap event.
   ///
@@ -50,6 +61,17 @@ class PictureButton extends StatefulWidget {
   ///
   /// default is 'null'
   final VoidCallback? onLongPressed;
+
+  /// Certainly define [imageSelected] property.
+  ///
+  /// [onSelectChanged] function return PictureButton's current state.
+  /// isSelected true or false.
+  ///
+  /// when you want PictureButton's selected state. define it.
+  /// and [imageSelected].
+  ///
+  /// so you will be show it after tap event.
+  final Function(bool isSelected)? onSelectChanged;
 
   /// ImageProvider type
   /// you should ImageProvider,
@@ -80,6 +102,24 @@ class PictureButton extends StatefulWidget {
   /// when you pressed PictureButton Widget.
   /// change toggle [image] and [imagePressed] images.
   final ImageProvider? imagePressed;
+
+  /// [image] is default image.
+  ///
+  /// [imageSelected] is selected PictureButton's image.
+  ///
+  /// when you pressed and touch up this.
+  /// change [image] to [imageSelected].
+  ///
+  /// isSelected = true, [imageSelected].
+  ///
+  /// isSelected = false, [image]
+  ///
+  ///
+  ///
+  /// Certainly you should define [onSelectChanged] function.
+  /// [onSelectChanged] function returns PictureButton's current state.
+  /// isSelected true or false.
+  final ImageProvider? imageSelected;
 
   /// setting Image [width]
   /// type double
@@ -274,9 +314,22 @@ class _PictureButtonState extends State<PictureButton>
   /// PictureButton Pressed state notify.
   bool isPressed = false;
 
+  /// [isSelectedMode] check not null.
+  /// to [widget.onSelectChanged] and [widget.imageSelected]
+  late final bool isSelectedMode;
+
+  /// PictureButton Selected state notify.
+  ///
+  /// check [isSelectedMode]
+  /// connect [widget.onSelectChanged] and [widget.imageSelected]
+  bool isSelected = false;
+
   @override
   void initState() {
     super.initState();
+
+    isSelectedMode =
+        widget.onSelectChanged != null && widget.imageSelected != null;
 
     loadImageInfo();
   }
@@ -313,9 +366,18 @@ class _PictureButtonState extends State<PictureButton>
               padding: widget.paddingInk,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: isPressed
-                      ? widget.imagePressed ?? widget.image
-                      : widget.image,
+                  image: isSelectedMode
+                      ? isPressed
+                          ? widget.imagePressed ??
+                              (isSelected
+                                  ? widget.imageSelected!
+                                  : widget.image)
+                          : isSelected
+                              ? widget.imageSelected!
+                              : widget.image
+                      : isPressed
+                          ? widget.imagePressed ?? widget.image
+                          : widget.image,
                   fit: widget.fit,
                   opacity: widget.opacity,
                 ),
@@ -345,6 +407,11 @@ class _PictureButtonState extends State<PictureButton>
                     setState(() {
                       if (widget.useBubbleEffect) {
                         animScale = 1.00;
+                      }
+
+                      if (isSelectedMode) {
+                        isSelected = !isSelected;
+                        widget.onSelectChanged!(isSelected);
                       }
 
                       isPressed = false;
