@@ -61,21 +61,19 @@ import 'package:picture_button/picture_button.dart';
 
 ## Update 🍭
 
-add `imagePressed` parameter from `0.0.8` version. <br/>
-you can see the pressed image when you implement `onPressed` event.
+add `imageSelected` and `onSelectChanged` parameters from `0.0.9` version. <br/>
+you can toggle action from this release. <br/>
+when you want to see toggle action, Certainly define `imageSelected` and `onSelectChanged` parameters. <br/>
+if you do not define one, there do not work.
 
-<img src="https://github.com/user-attachments/assets/55ddb2bb-6584-43e0-be9c-deedeb7ccd75" alt="GIF" width="150" />
-
+<img src="https://github.com/user-attachments/assets/480ca06c-5459-40c2-a28f-32f951429d0f" alt="GIF" width="240">
 
 ```dart
- PictureButton(
-   onPressed: () {
-   },
-   image: Image.asset("assets/icon_flutter_default.png").image,
-   imagePressed: Image.asset("assets/icon_flutter_pressed.png").image,
-   ...
- )
+  PictureButton(
+  
+  )
 ```
+
 
 <br/>
 
@@ -176,4 +174,23 @@ use later `.image` getter function.
    borderRadiusInk: BorderRadius.circular(8.0),
    // paddingInk: EdgeInsets.all(8.0),   if you want measure 'Ink' padding.
  ),
+```
+
+<br/>
+
+#### 🏈 pressed button image
+
+add `imagePressed` parameter from `0.0.8` version. <br/>
+you can see the pressed image when you implement `onPressed` event.
+
+<img src="https://github.com/user-attachments/assets/55ddb2bb-6584-43e0-be9c-deedeb7ccd75" alt="GIF" width="150" />
+
+```dart
+ PictureButton(
+   onPressed: () {
+   },
+   image: Image.asset("assets/icon_flutter_default.png").image,
+   imagePressed: Image.asset("assets/icon_flutter_pressed.png").image,
+   ...
+ )
 ```
