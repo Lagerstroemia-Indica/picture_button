@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:picture_button/src/picture_bubble_effect.dart';
 import './picture_button_mixin_protocol.dart';
 
@@ -34,6 +35,7 @@ class PictureButton extends StatefulWidget {
       this.focusColor,
       this.hoverColor,
       this.enabled = true,
+      this.vibrate = true,
       this.useBubbleEffect = false,
       this.bubbleEffect = PictureBubbleEffect.shrink,
       this.child})
@@ -249,6 +251,17 @@ class PictureButton extends StatefulWidget {
   /// default is 'true'
   final bool enabled;
 
+  /// import 'package:flutter/services.dart';
+  ///
+  /// operate HapticFeedback.lightImpact();
+  ///
+  /// -
+  ///
+  /// default [vibrate] value is 'true'
+  ///
+  /// UPDATE: 30, Aug 2024. Version:0.0.10
+  final bool vibrate;
+
   /// if you onPressed Event PictureButton Widget,
   /// Widget show you bubble effect.
   ///
@@ -390,7 +403,7 @@ class _PictureButtonState extends State<PictureButton>
                 child: InkWell(
                   onTap: widget.enabled ? widget.onPressed : null,
                   onLongPress: widget.onLongPressed,
-                  onTapDown: (details) {
+                  onTapDown: (details) async {
                     setState(() {
                       if (widget.useBubbleEffect) {
                         // animScale = 1.05;
@@ -402,6 +415,10 @@ class _PictureButtonState extends State<PictureButton>
 
                       isPressed = true;
                     });
+
+                    if (widget.vibrate) {
+                      await HapticFeedback.lightImpact();
+                    }
                   },
                   onTapUp: (details) {
                     setState(() {
