@@ -26,13 +26,13 @@ I am very happy that I somehow seem to have deployed a useful widget.
 
 ## Getting started 🌱
 
-my example image(google sign image) <br/>
+My example image(google sign image) <br/>
 path : `[project]/assets/` <br/> <br/>
 <img src="https://github.com/user-attachments/assets/1c70006a-ee4c-4da3-9f58-b99d15865169" alt="Screenshot" width="480">
 
 <br/>
 
- grant assets path from pubspec.yaml <br/>
+ Grant assets path from pubspec.yaml <br/>
  path : `[project]/pubspec.yaml` <br/> 
  ```yaml
 flutter:
@@ -212,17 +212,17 @@ If you do not define one, there do not work.
 <img src="https://github.com/user-attachments/assets/480ca06c-5459-40c2-a28f-32f951429d0f" alt="GIF" width="240">
 
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    onSelectChanged: (isSelected) {
-      
-    },
-    image: Image.asset("assets/icon_flutter_default.png").image,
-    imagePressed: Image.asset("assets/icon_flutter_pressed.png").image,
-    imageSelected: Image.asset("assets/icon_flutter_other.png").image,
-  )
+ PictureButton(
+   onPressed: () {
+     
+   },
+   onSelectChanged: (isSelected) {
+     
+   },
+   image: Image.asset("assets/icon_flutter_default.png").image,
+   imagePressed: Image.asset("assets/icon_flutter_pressed.png").image,
+   imageSelected: Image.asset("assets/icon_flutter_other.png").image,
+ )
 ```
 
 <br/>
