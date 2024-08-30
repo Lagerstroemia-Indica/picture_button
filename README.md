@@ -104,6 +104,7 @@ That is default setting `true`.
 | focusColor      | :x:                 | Color?                     |                            |
 | hoverColor      | :x:                 | Color?                     |                            |
 | enabled         | :x:                 | bool                       | true                       |
+| vibrate         | :x:                 | bool                       | true                       |
 | useBubbleEffect | :x:                 | bool                       | false                      |
 | bubbleEffect    | :x:                 | PictureBubbleEffect?       | PictureBubbleEffect.shrink | 
 | child           | :x:                 | Widget?                    |                            |
