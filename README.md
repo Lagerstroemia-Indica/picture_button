@@ -46,12 +46,12 @@ flutter:
     - assets/
 ```
 
-#### add
+#### Add
 ```text
 flutter pub add picture_button
 ```
 
-#### import
+#### Import
 ```dart
 import 'package:picture_button/picture_button.dart';
 ```
@@ -85,10 +85,6 @@ if you do not define one, there do not work.
 <br/>
 
 ## Usage 🚀
-<details>
-<summary><b>parameters</b></summary>
-
-<br/>
 
 | parameter       | required            | type                       | default                    |
 |-----------------|---------------------|----------------------------|----------------------------|
@@ -116,8 +112,6 @@ if you do not define one, there do not work.
 | useBubbleEffect | :x:                 | bool                       | false                      |
 | bubbleEffect    | :x:                 | PictureBubbleEffect?       | PictureBubbleEffect.shrink | 
 | child           | :x:                 | Widget?                    |                            |
-
-</details>
 
 <br/>
 
