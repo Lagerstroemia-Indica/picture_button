@@ -61,24 +61,19 @@ import 'package:picture_button/picture_button.dart';
 
 ## Update 🍭
 
-add `imageSelected` and `onSelectChanged` parameters from `0.0.9` version. <br/>
-you can toggle action from this release. <br/>
-when you want to see toggle action, Certainly define `imageSelected` and `onSelectChanged` parameters. <br/>
-if you do not define one, there do not work.
-
-<img src="https://github.com/user-attachments/assets/480ca06c-5459-40c2-a28f-32f951429d0f" alt="GIF" width="240">
+Add `vibrate` parameter from `0.0.10` version. <br/>
+You can set vibration effect. <br/>
+It just input `true` or `false` parameter that is bool type. <br/>
+That is default setting `true`.
 
 ```dart
-  PictureButton(
-    onPressed: () {
-      
-    },
-    onSelectChanged: (isSelected) {
-      
-    },
-    image: Image.asset("assets/icon_flutter_default.png").image,
-    imageSelected: Image.asset("assets/icon_flutter_other.png").image,
-  )
+ PictureButton(
+   onPressed: () {
+     
+   },
+   image: const AssetImage("assets/google_sign_image.png"),
+   vibrate: false,  // default, true.
+ ),
 ```
 
 
@@ -128,7 +123,7 @@ if you do not define one, there do not work.
 <br/>
 
 #### 👨‍👨‍👧‍👦 Image.asset(..), Image.network(..), Image.file(..), Image.memory(..)
-use later `.image` getter function.
+Use later `.image` getter function.
 
 
 ```dart
@@ -156,7 +151,7 @@ use later `.image` getter function.
 
 <br/>
 
-#### 🖌 if you don't want Effect(Ripple) Color (I said 'Ink')
+#### 🖌 If you don't want Effect(Ripple) Color (I said 'Ink')
 `splashColor: Colors.transparent` <br/>
 `highlightColor: Colors.transparent` <br/>
 ```dart
@@ -172,7 +167,7 @@ use later `.image` getter function.
 
 <br/>
 
-#### ✂ measure Effect(Ripple) BorderRadius
+#### ✂ Measure Ripple Effect BorderRadius
 `borderRadiusInk: BorderRadius.circular(8.0)`
 ```dart
  PictureButton(
@@ -187,10 +182,10 @@ use later `.image` getter function.
 
 <br/>
 
-#### 🏈 pressed button image
+#### 🏈 Pressed Button Image
 
-add `imagePressed` parameter from `0.0.8` version. <br/>
-you can see the pressed image when you implement `onPressed` event.
+Add `imagePressed` parameter from `0.0.8` version. <br/>
+You can see the pressed image when you implement `onPressed` event.
 
 <img src="https://github.com/user-attachments/assets/55ddb2bb-6584-43e0-be9c-deedeb7ccd75" alt="GIF" width="150" />
 
@@ -204,3 +199,30 @@ you can see the pressed image when you implement `onPressed` event.
    ...
  )
 ```
+
+<br/>
+
+#### 🌗 Toggle Button
+
+Add `imageSelected` and `onSelectChanged` parameters from `0.0.9` version. <br/>
+You can toggle action from this release. <br/>
+When you want to see toggle action, Certainly define `imageSelected` and `onSelectChanged` parameters. <br/>
+If you do not define one, there do not work.
+
+<img src="https://github.com/user-attachments/assets/480ca06c-5459-40c2-a28f-32f951429d0f" alt="GIF" width="240">
+
+```dart
+  PictureButton(
+    onPressed: () {
+      
+    },
+    onSelectChanged: (isSelected) {
+      
+    },
+    image: Image.asset("assets/icon_flutter_default.png").image,
+    imagePressed: Image.asset("assets/icon_flutter_pressed.png").image,
+    imageSelected: Image.asset("assets/icon_flutter_other.png").image,
+  )
+```
+
+<br/>
