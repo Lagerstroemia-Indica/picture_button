@@ -400,60 +400,22 @@ class _PictureButtonState extends State<PictureButton>
               ),
               child: Material(
                 color: Colors.transparent,
-                child: InkWell(
-                  onTap: widget.enabled ? widget.onPressed : null,
-                  onLongPress: widget.onLongPressed,
-                  onTapDown: (details) async {
-                    setState(() {
-                      if (widget.useBubbleEffect) {
-                        // animScale = 1.05;
-                        animScale =
-                            widget.bubbleEffect == PictureBubbleEffect.shrink
-                                ? animScaleShrink
-                                : animScaleExpand;
-                      }
+                child: Builder(
+                  builder: (context) {
+                    final isRow =
+                        context.findAncestorWidgetOfExactType<Row>() != null;
+                    final isColumn =
+                        context.findAncestorWidgetOfExactType<Column>() != null;
 
-                      isPressed = true;
-                    });
-
-                    if (widget.vibrate) {
-                      await HapticFeedback.lightImpact();
+                    if (!isRow && !isColumn) {
+                      return child;
+                    } else {
+                      return Flex(
+                        direction: isRow ? Axis.horizontal : Axis.vertical,
+                        children: [child],
+                      );
                     }
                   },
-                  onTapUp: (details) {
-                    setState(() {
-                      if (widget.useBubbleEffect) {
-                        animScale = 1.00;
-                      }
-
-                      if (isSelectedMode) {
-                        isSelected = !isSelected;
-                        widget.onSelectChanged!(isSelected);
-                      }
-
-                      isPressed = false;
-                    });
-                  },
-                  onTapCancel: () {
-                    setState(() {
-                      if (widget.useBubbleEffect) {
-                        animScale = 1.00;
-                      }
-
-                      isPressed = false;
-                    });
-                  },
-                  splashColor: widget.splashColor,
-                  highlightColor: widget.highlightColor,
-                  focusColor: widget.focusColor,
-                  hoverColor: widget.hoverColor,
-                  borderRadius: widget.borderRadiusInk ?? widget.borderRadius,
-                  enableFeedback: widget.enabled,
-                  child: SizedBox(
-                    width: imageWidth,
-                    height: imageHeight,
-                    child: widget.child,
-                  ),
                 ),
               ),
             ),
@@ -462,6 +424,61 @@ class _PictureButtonState extends State<PictureButton>
       ),
     );
   }
+
+  Widget get child => InkWell(
+        onTap: widget.enabled ? widget.onPressed : null,
+        onLongPress: widget.onLongPressed,
+        onTapDown: (details) async {
+          setState(() {
+            if (widget.useBubbleEffect) {
+              // animScale = 1.05;
+              animScale = widget.bubbleEffect == PictureBubbleEffect.shrink
+                  ? animScaleShrink
+                  : animScaleExpand;
+            }
+
+            isPressed = true;
+          });
+
+          if (widget.vibrate) {
+            await HapticFeedback.lightImpact();
+          }
+        },
+        onTapUp: (details) {
+          setState(() {
+            if (widget.useBubbleEffect) {
+              animScale = 1.00;
+            }
+
+            if (isSelectedMode) {
+              isSelected = !isSelected;
+              widget.onSelectChanged!(isSelected);
+            }
+
+            isPressed = false;
+          });
+        },
+        onTapCancel: () {
+          setState(() {
+            if (widget.useBubbleEffect) {
+              animScale = 1.00;
+            }
+
+            isPressed = false;
+          });
+        },
+        splashColor: widget.splashColor,
+        highlightColor: widget.highlightColor,
+        focusColor: widget.focusColor,
+        hoverColor: widget.hoverColor,
+        borderRadius: widget.borderRadiusInk ?? widget.borderRadius,
+        enableFeedback: widget.enabled,
+        child: SizedBox(
+          width: imageWidth,
+          height: imageHeight,
+          child: widget.child,
+        ),
+      );
 
   /// ImageProvider's real sizes.
   ///

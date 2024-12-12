@@ -1,3 +1,6 @@
+## 0.1.1
+* Mod onPressed ripple area.
+
 ## 0.0.10
 * add vibrate parameter.
 
